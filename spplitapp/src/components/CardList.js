@@ -15,24 +15,13 @@ export default function CardList() {
 
     const [cardList, setCardList] = useState([]);
 
-    // const [clicked, setClicked] = useState(0);
-    // const [categoryBar, setCategoryBar] = useState([]);
-
-    // const [query, setQuery] = useState(null);
-
-
     // // 토큰 획득
     USER_TOKEN = "d956ff93cd9912ce04966deef265679dadbfda4b"
     const AuthStr = "Token ".concat(USER_TOKEN)
 
-        
-
     // 카드 획득
     useEffect(() => {
         const url = "https://spplit.herokuapp.com/card";
-        const a = { headers : { Authorization: AuthStr} }
-        console.log(a)
-        console.log(AuthStr)
         axios.get(url, { headers : { Authorization: AuthStr} })
         .then(function(response) {
             setCardList(response.data);

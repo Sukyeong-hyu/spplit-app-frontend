@@ -41,25 +41,34 @@ export default function Search({ cards }) {
 
         console.log(query)
 
+        const customTagCheck = (query, tag) => {
+            let x = false;
+            if (tag !== null) {
+                if (tag.toLowerCase().includes(query.trim().toLowerCase())) {
+                    x = true
+                }
+                else x = false
+            }
+            return x
+        }
+        
+
         if (query === null) {
             return result
         }
         
-        else if (result.custom_tag1.toLowerCase().includes(query.trim().toLowerCase())||
-            result.custom_tag2.toLowerCase().includes(query.trim().toLowerCase())||
-            result.custom_tag3.toLowerCase().includes(query.trim().toLowerCase())||
-            result.custom_tag4.toLowerCase().includes(query.trim().toLowerCase())||
-            result.custom_tag5.toLowerCase().includes(query.trim().toLowerCase())||
-            result.notes.toLowerCase().includes(query.trim().toLowerCase())||
-            result.friend_card.name.toLowerCase().includes(query.trim().toLowerCase())||
+        else if (result.friend_card.name.toLowerCase().includes(query.trim().toLowerCase())||
             result.friend_card.job.toLowerCase().includes(query.trim().toLowerCase())||
             result.friend_card.phone.toLowerCase().includes(query.trim().toLowerCase())||
             result.friend_card.email.toLowerCase().includes(query.trim().toLowerCase())||
             result.friend_card.tag1.toLowerCase().includes(query.trim().toLowerCase())||
             result.friend_card.tag2.toLowerCase().includes(query.trim().toLowerCase())||
-            result.friend_card.tag3.toLowerCase().includes(query.trim().toLowerCase())) {
+            result.friend_card.tag3.toLowerCase().includes(query.trim().toLowerCase())||
+            result.notes.toLowerCase().includes(query.trim().toLowerCase())||customTagCheck(query.trim(), result.custom_tag1)||
+            customTagCheck(query.trim(), result.custom_tag2)||customTagCheck(query.trim(), result.custom_tag3)||
+            customTagCheck(query.trim(), result.custom_tag4)||customTagCheck(query.trim(), result.custom_tag5)) {
                 return result
-            }
+        }
     })
 
 

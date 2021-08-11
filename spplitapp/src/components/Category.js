@@ -84,44 +84,88 @@ export default function Category({ cardList }) {
 
     const [clicked, setClicked] = useState(0);
 
-    // 토큰 획득
-    USER_TOKEN = "d956ff93cd9912ce04966deef265679dadbfda4b"
-    const AuthStr = "Token ".concat(USER_TOKEN)
+    // // 토큰 획득
+    // USER_TOKEN = "d956ff93cd9912ce04966deef265679dadbfda4b"
+    // const AuthStr = "Token ".concat(USER_TOKEN)
+    
 
-    // 유저별 custom 카테고리 획득
-    useEffect(() => {
-        const url = "https://spplit.herokuapp.com/user/category";
-        axios.get(url, { headers : { Authorization: AuthStr} })
-        .then(function(response) {
-            setCategoryList(response.data);
-            console.log("Category loading success");
+    // USER_TOKEN = "5e8adbc6fcc6c326b12b30aa2726e0f5f1d0c272"
+    // const AuthStr = "Token ".concat(USER_TOKEN)
 
-            const category_dict = {}
-            const categories = [];
+    // useEffect(() => {
+    //     const url = "http://127.0.0.1:3000/user/division"
+    //     axios.get(url, { headers : { Authorization: AuthStr} })
+    //     .then(function(response) {
+    //         console.log("plz")
+    //     })
+    //     .catch(function(error) {
+    //        console.log(error);
+    //     })
+    // }, [])
+
+    // // 유저별 custom 카테고리 획득
+    // useEffect(() => {
+    //     const url = "https://spplit.herokuapp.com/user/category";
+    //     axios.get(url, { headers : { Authorization: AuthStr} })
+    //     .then(function(response) {
+    //         setCategoryList(response.data);
+    //         console.log("Category loading success");
+
+    //         const category_dict = {}
+    //         const categories = [];
             
-            category_dict["category1"] = categoryList[0].category1
-            category_dict["category2"] = categoryList[0].category2
-            category_dict["category3"] = categoryList[0].category3
-            category_dict["category4"] = categoryList[0].category4
-            category_dict["category5"] = categoryList[0].category5
-            category_dict["category6"] = categoryList[0].category6
-            category_dict["category7"] = categoryList[0].category7
-            category_dict["category8"] = categoryList[0].category8
-            category_dict["category9"] = categoryList[0].category9
-            category_dict["category10"] = categoryList[0].category10
+    //         category_dict["category1"] = categoryList[0].category1
+    //         category_dict["category2"] = categoryList[0].category2
+    //         category_dict["category3"] = categoryList[0].category3
+    //         category_dict["category4"] = categoryList[0].category4
+    //         category_dict["category5"] = categoryList[0].category5
+    //         category_dict["category6"] = categoryList[0].category6
+    //         category_dict["category7"] = categoryList[0].category7
+    //         category_dict["category8"] = categoryList[0].category8
+    //         category_dict["category9"] = categoryList[0].category9
+    //         category_dict["category10"] = categoryList[0].category10
 
-            for (var key in category_dict) {
-                if (category_dict.hasOwnProperty(key)) {
-                    categories.push(category_dict[key]);
-                }
-            }  
-            setCategoryBar(categories)
-        })
-        .catch(function(error) {
-            console.log("Category loading failure");
-        })
-    }, [])
+    //         for (var key in category_dict) {
+    //             if (category_dict.hasOwnProperty(key)) {
+    //                 categories.push(category_dict[key]);
+    //             }
+    //         }  
+    //         setCategoryBar(categories)
+    //     })
+    //     .catch(function(error) {
+    //         console.log("Category loading failure");
+    //     })
+    // }, [])
 
+    // const buttonList = categoryBar.slice(0,4).map((value, index) => {
+    //     return (
+    //         <CategoryTextContainer>
+    //             <CategoryText key={index} active={clicked === index} onPress={() => setClicked(index)}>{value}</CategoryText>
+    //         </CategoryTextContainer>
+    //     )
+    // })
+
+    const categoryBar = [
+        {
+            "id": 1,
+            "category1": "All",
+            "is_checked_category1": true,
+            "category2": "Bookmark",
+            "is_checked_category2": true,
+            "category3": "Work",
+            "is_checked_category3": true,
+            "category4": "Team",
+            "is_checked_category4": false,
+            "category5": "Sport",
+            "is_checked_category5": true,
+            "category6": "Group",
+            "is_checked_category6": false,
+            "category7": "Other",
+            "is_checked_category7": false,
+            "user": 23
+        }
+    ]
+    
     const buttonList = categoryBar.slice(0,4).map((value, index) => {
         return (
             <CategoryTextContainer>
@@ -129,6 +173,8 @@ export default function Category({ cardList }) {
             </CategoryTextContainer>
         )
     })
+
+
 
 
 
