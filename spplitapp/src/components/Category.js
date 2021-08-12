@@ -79,8 +79,8 @@ const CategoryText = styled.Text`
 
 export default function Category({ cardList }) {
 
-    const [categoryList, setCategoryList] = useState([]);
-    const [categoryBar, setCategoryBar] = useState([]);
+    // const [categoryList, setCategoryList] = useState([]);
+    // const [categoryBar, setCategoryBar] = useState([]);
 
     const [clicked, setClicked] = useState(0);
 
@@ -154,10 +154,10 @@ export default function Category({ cardList }) {
             "is_checked_category2": true,
             "category3": "Work",
             "is_checked_category3": true,
-            "category4": "Team",
-            "is_checked_category4": false,
+            "category4": "Teams",
+            "is_checked_category4": true,
             "category5": "Sport",
-            "is_checked_category5": true,
+            "is_checked_category5": false,
             "category6": "Group",
             "is_checked_category6": false,
             "category7": "Other",
@@ -165,8 +165,39 @@ export default function Category({ cardList }) {
             "user": 23
         }
     ]
-    
-    const buttonList = categoryBar.slice(0,4).map((value, index) => {
+    const categoryCheckedList = []
+
+    if (categoryBar[0].is_checked_category1) {
+        categoryCheckedList.push(categoryBar[0].category1)
+    }
+
+    if (categoryBar[0].is_checked_category2) {
+        categoryCheckedList.push(categoryBar[0].category2)
+    }
+
+    if (categoryBar[0].is_checked_category3) {
+        categoryCheckedList.push(categoryBar[0].category3)
+    }
+
+    if (categoryBar[0].is_checked_category4) {
+        categoryCheckedList.push(categoryBar[0].category4)
+    }
+
+    if (categoryBar[0].is_checked_category5) {
+        categoryCheckedList.push(categoryBar[0].category5)
+    }
+
+    if (categoryBar[0].is_checked_category6) {
+        categoryCheckedList.push(categoryBar[0].category6)
+    }
+
+    if (categoryBar[0].is_checked_category7) {
+        categoryCheckedList.push(categoryBar[0].category7)
+    }
+
+    console.log(categoryCheckedList)
+
+    const buttonList = categoryCheckedList.map((value, index) => {
         return (
             <CategoryTextContainer>
                 <CategoryText key={index} active={clicked === index} onPress={() => setClicked(index)}>{value}</CategoryText>
@@ -175,25 +206,21 @@ export default function Category({ cardList }) {
     })
 
 
-
-
-
-
     const cards = cardList.filter((card)=> {
         console.log(clicked)
         // All 띄우기
-        if (clicked === categoryBar.indexOf("All")) {
+        if (clicked === categoryCheckedList.indexOf(categoryCheckedList[0])) {
             return card
         }
         // Bookmark 띄우기
-        if (clicked === categoryBar.indexOf("Bookmark") && card.isBookmarked === true) {
+        if (clicked === categoryCheckedList.indexOf(categoryCheckedList[1]) && card.isBookmarked === true) {
             return card
         }
         // 카테고리별 필터
-        if (clicked === categoryBar.indexOf(categoryBar[2]) && categoryBar[2].toLowerCase() === card.division.toLowerCase()) {
+        if (clicked === categoryCheckedList.indexOf(categoryCheckedList[2]) && categoryCheckedList[2].toLowerCase() === card.division.toLowerCase()) {
             return card
         }
-        if (clicked === categoryBar.indexOf(categoryBar[3]) && categoryBar[3].toLowerCase() === card.division.toLowerCase()) {
+        if (clicked === categoryCheckedList.indexOf(categoryCheckedList[3]) && categoryCheckedList[3].toLowerCase() === card.division.toLowerCase()) {
             return card
         }
     })
